@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+body{
+    .text-warning {
+        color: #6C63FF !important;
+    }
+
+    .custom-color{
+        color: palegreen;
+    }
+
+    .custom-theme-color{
+        color: #6C63FF !important;
+    }
+}
+
