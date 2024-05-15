@@ -7,7 +7,7 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.Text)
     progress = db.Column(db.Integer)
-    deadline = db.Column(db.DateTime)
+    deadline = db.Column(db.Date)
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
