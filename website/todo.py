@@ -83,14 +83,13 @@ def edit_todo(todo_id):
 @todo.route('/delete-todo/<int:todo_id>', methods=['GET', 'POST'])
 @login_required
 def delete_todo(todo_id):
-    todo_to_delete = Todo.query.get_or_404(todo_id)
-    # Überprüfen, ob die Aufgabe dem aktuellen Benutzer gehört
-    if todo_to_delete.user_id != current_user.id:
+    todo_delete = Todo.query.get_or_404(todo_id)
+
+    if todo_delete.user_id != current_user.id:
         flash("You are not authorized to delete this todo.", "error")
         return redirect(url_for('index'))
     
-    # Aufgabe aus der Datenbank löschen
-    db.session.delete(todo_to_delete)
+    db.session.delete(todo_delete)
     db.session.commit()
     flash("Todo deleted successfully.", "success")
     return redirect(url_for('views.home'))
