@@ -5,6 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/include" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.12 (flaskProject_WebLogin)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
