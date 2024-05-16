@@ -12,7 +12,7 @@
     <section class="bg-dark">
         <div class="bg-body-tertiary container p-5">
             <h2>To-Do bearbeiten</h2>
-            <form method="POST" action="{{ url_for('todo.edit_todo', id=todo.id) }}">
+            <form method="POST" action="{{ url_for('todo.edit_todo', todo_id=todo.id) }}">
                 <div class="form-group">
                     <label for="todoText">To-Do-Text</label>
                     <input type="text" class="form-control" id="todoText" name="todo-text" value="{{ todo.data }}" placeholder="Bearbeiten des To-Do Text">
