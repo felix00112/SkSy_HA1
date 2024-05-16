@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit To-Do</title>
+    <!--Bootstrap Styles-->
+    <link rel = "stylesheet" href="../website/static/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <!--Zusätzliche eigene CSS-->
+    <link rel="stylesheet" href="../website/static/css/style.css" type="text/css" media="screen">
+</head>
+<body>
+
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3">
+    <div class="container">
+
+        <a href="#" class="navbar-brand">TODO-Tracker</a>
+
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navmenu"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="../website/templates/index.html" class="nav-link">All To-Do's</a>
+                </li>
+                <li class="nav-item">
+                    <a href="todo-new.html" class="nav-link">New To-Do</a>
+                </li>
+                <li class="nav-item">
+                    <a href="todo-edit.html" class="nav-link">Edit To-Do</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</nav>
+
+<section class="bg-dark">
+
+    <div class="bg-body-tertiary container p-5">
+        <h2>To-Do bearbeiten</h2>
+        <form>
+            <div class="form-group">
+                <label for="todoText">To-Do-Text</label>
+                <input type="text" class="form-control" id="todoText" placeholder="Bearbeiten des To-Do Text">
+            </div>
+            <div class="form-group">
+                <label for="todoDeadline">Deadline</label>
+                <input type="date" class="form-control" id="todoDeadline" placeholder="26. April 2024">
+            </div>
+            <div class="form-group">
+                <label for="todoProgress">Fortschritt</label>
+                <input type="text" class="form-control" id="todoProgress" placeholder="0%">
+            </div>
+            <button type="submit" class="btn btn-primary my-3">Aktualisieren</button>
+        </form>
+    </div>
+</section>
+<!-- Bootstrap JavaScript und Abhängigkeiten -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
