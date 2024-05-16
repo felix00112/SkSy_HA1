@@ -48,6 +48,7 @@ def edit_todo(todo_id):
         flash('You do not have permission to edit this todo', 'error')
         return redirect(url_for('views.home'))
 
+
     if request.method == 'POST':
         # Get data from form
         todo_text = request.form.get('todo-text')
@@ -79,8 +80,11 @@ def edit_todo(todo_id):
     return render_template('edit-todo.html', user=current_user, todo=todo_item)
 
 
-@todo.route('/delete-todo', methods=['GET', 'POST'])
+@todo.route('/delete-todo/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_todo():
-    # todo: implement method for deleting todos
-    pass
+    todo = Todo.query.get(id)
+    if todo:
+        db.session.delete(todo)
+        db.session.commit()
+    return redirect(url_for('index')) 
