@@ -1,10 +1,10 @@
-import logging
-
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 import os
 import logging
+
+# script for initializing flask app and creating database
 
 logging.basicConfig(level=logging.INFO)
 basedir = os.path.abspath(os.path.dirname(__file__))

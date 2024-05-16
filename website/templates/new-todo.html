@@ -1,10 +1,16 @@
 {% extends "index.html" %}
+
+{#inheriting from index.html#}
+{#displays the page for adding a new todo#}
+
+{#overwriting the title of the template#}
 {% block title %}
 	New Todo
 {% endblock %}
+
+{#overwriting the content of the template#}
 {% block content %}
     <section class="bg-dark">
-
         <div class="bg-body-tertiary container p-5">
             <h2>Neues To-Do erstellen</h2>
             <form method="POST">

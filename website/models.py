@@ -2,6 +2,9 @@ from . import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 
+# creating tables for database
+
+# table for todos
 class Todo(db.Model):
     __tablename__ = 'todos'
     id = db.Column(db.Integer, primary_key=True)
@@ -11,6 +14,7 @@ class Todo(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
+# table for users
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)

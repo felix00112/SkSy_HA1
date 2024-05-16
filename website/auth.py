@@ -4,16 +4,21 @@ from website import db
 from website.models import User
 from flask_login import current_user, login_user, logout_user, login_required
 
+# all routes needed for authentication
+
 auth = Blueprint('auth', __name__)
 
+# route for signup page
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
+    # getting data from form
     if request.method == 'POST':
         email = request.form.get('email')
         first_name = request.form.get('firstName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
+        # checks if registration is valid
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already registered',category='error')
@@ -36,13 +41,16 @@ def signup():
 
     return render_template('sign_up.html', user=current_user)
 
+# route for login page
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    # getting data from form
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
 
         user = User.query.filter_by(email=email).first()
+        # check if user exists in database
         if user:
             if check_password_hash(user.password, password):
                 flash('You have successfully logged in', category='success')
@@ -55,6 +63,7 @@ def login():
 
     return render_template('login.html', user=current_user)
 
+# route for logout
 @auth.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():

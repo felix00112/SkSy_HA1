@@ -1,9 +1,18 @@
 {% extends "index.html" %}
+
+{#inheriting from index.html#}
+
+{#overwriting title of template#}
 {% block title %}
-	Edit Todo
+    Edit Todo
 {% endblock %}
+
+{#overwriting content of template#}
 {% block content %}
     <section class="bg-dark">
+
+        {#    todo: inputs need attribute 'name=' to get referenced correctly!
+                make sure to name attributes consistently to avoid errors/bugs #}
 
         <div class="bg-body-tertiary container p-5">
             <h2>To-Do bearbeiten</h2>
