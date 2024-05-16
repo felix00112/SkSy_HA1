@@ -125,3 +125,48 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# IntelliJ IDEA project files
+.idea/
+
+# User-specific files
+*.iml
+*.iws
+
+# User-specific folders
+.idea/
+.idea/*
+
+# PyCharm-specific files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Virtual environment directories
+venv/
+ENV/
+env/
+.env/
+.venv/
+
+# VS Code directory
+.vscode/
+
+# User-specific files
+*.code-workspace
+
+# History for replay debugger
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/settings.json
+.vscode/extensions.json
+
+# Local history of files (if using a plugin for local history)
+.vscode/history/
+
+# User-specific extensions
+.vscode/extensions/
+
+# Optional: Exclude the VS Code server for remote development
+.vscode-server/
