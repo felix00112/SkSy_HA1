@@ -34,9 +34,7 @@
 
 {#                    navbar items that should only be shown if user is logged in#}
                     {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a href="#todoList" class="nav-link">All To-Do's</a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="/new-todo" class="nav-link">New To-Do</a>
                         </li>

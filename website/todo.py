@@ -39,9 +39,31 @@ def new_todo():
 
 @todo.route('/edit-todo', methods=['GET', 'POST'])
 @login_required
-def edit_todo():
+def edit_todo(id):
     # todo: implement method for editing todos
-    return render_template('edit-todo.html', user=current_user)
+
+    if request.method == 'POST':
+        todo_text = request.form.get('todo-text')
+        deadline_str = request.form.get('deadline')
+        progress = request.form.get('progress')
+        # Überprüfen, ob alle Felder ausgefüllt sind
+        if not todo_text or not deadline_str or not progress:
+            flash('Alle Felder sind erforderlich', 'error')
+            return redirect(url_for('todo.edit_todo', id=todo.id))
+        try:
+            deadline = datetime.strptime(deadline_str, '%Y-%m-%d').date()
+        except ValueError:
+            flash('Ungültiges Datumformat für die Deadline', 'error')
+            return redirect(url_for('todo.edit_todo', id=todo.id))
+        # Aktualisieren der ToDo-Daten
+        todo.data = todo_text
+        todo.deadline = deadline
+        todo.progress = int(progress)
+        db.session.commit()
+        flash('ToDo aktualisiert', 'success')
+        return redirect(url_for('views.home'))
+
+    return render_template('edit-todo.html', user=current_user, todo=todo)
 
 @todo.route('/delete-todo', methods=['GET', 'POST'])
 @login_required
