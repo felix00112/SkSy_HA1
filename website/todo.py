@@ -39,7 +39,7 @@ def new_todo():
 
 @todo.route('/edit-todo', methods=['GET', 'POST'])
 @login_required
-def edit_todo(id):
+def edit_todo():
     # todo: implement method for editing todos
 
     if request.method == 'POST':
