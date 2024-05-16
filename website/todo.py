@@ -42,6 +42,7 @@ def new_todo():
 def edit_todo():
     # todo: implement method for editing todos
 
+
     if request.method == 'POST':
         todo_text = request.form.get('todo-text')
         deadline_str = request.form.get('deadline')
@@ -65,8 +66,11 @@ def edit_todo():
 
     return render_template('edit-todo.html', user=current_user, todo=todo)
 
-@todo.route('/delete-todo', methods=['GET', 'POST'])
+@todo.route('/delete-todo/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_todo():
-    # todo: implement method for deleting todos
-    pass
+    todo = Todo.query.get(id)
+    if todo:
+        db.session.delete(todo)
+        db.session.commit()
+    return redirect(url_for('index')) 
