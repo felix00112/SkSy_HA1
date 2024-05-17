@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+import json
+
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 from datetime import datetime
 
@@ -80,11 +82,15 @@ def edit_todo(todo_id):
     return render_template('edit-todo.html', user=current_user, todo=todo_item)
 
 
-@todo.route('/delete-todo/<int:id>', methods=['GET', 'POST'])
+@todo.route('/delete-todo', methods=['GET', 'POST'])
 @login_required
 def delete_todo():
-    todo = Todo.query.get(id)
+    todo = json.loads(request.data)
+    todoId = todo.get('todoId')
+    todo = Todo.query.get_or_404(todoId)
     if todo:
-        db.session.delete(todo)
-        db.session.commit()
-    return redirect(url_for('index')) 
+        if todo.user_id == current_user.id:
+            db.session.delete(todo)
+            db.session.commit()
+            flash('Todo deleted', category='success')
+    return jsonify({})
