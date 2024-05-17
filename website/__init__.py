@@ -4,18 +4,19 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 import logging
 
-# script for initializing flask app and creating database
-
 logging.basicConfig(level=logging.INFO)
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
-def create_app():
+def create_app(config_name=None):
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'ABCDEFGHIJKLMNOPQRST'
-    app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///' + os.path.join(basedir, DB_NAME)
+    if config_name == 'testing':
+        app.config.from_object('website.config.TestConfig')
+    else:
+        app.config.from_object('website.config.Config')
+
     db.init_app(app)
 
     from .views import views
@@ -41,11 +42,9 @@ def create_app():
     return app
 
 def create_db(app):
-    db_path = os.path.join('website', DB_NAME)
-    full_path = os.path.join(app.instance_path, db_path)
-    if not os.path.exists(full_path):
-        with app.app_context():
+    with app.app_context():
+        if not os.path.exists(os.path.join(basedir, DB_NAME)):
             db.create_all()
             print('Database created successfully')
-    else:
-        print('Database already exists')
+        else:
+            print('Database already exists')
