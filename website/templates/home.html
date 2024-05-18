@@ -1,11 +1,10 @@
+<!DOCTYPE html>
 {% extends "index.html" %}
 
 {#inheriting from index.html#}
 
 {#overwriting title of template#}
-{% block title %}
-	Home
-{% endblock %}
+{% block title %} Home {% endblock %}
 
 {#overwriting content of template#}
 {% block content %}
@@ -37,7 +36,7 @@
     <!--To-Do-Section-->
     {#    If user is logged in, this should be displayed#}
     {% else %}
-        <section id="todoList" class="p-5">
+        <section id="todo-list" class="p-5">
 
             <div class="container mt-5">
                 <h2>Meine To-Do Liste</h2>
@@ -76,7 +75,7 @@
                                     <div class="d-flex col-md-3 align-items-center">
                                         <div class="progress w-100">
                                             <div class="progress-bar" role="progressbar" style="width: {{ todo.progress }}%;"
-                                                 aria-valuenow={{ todo.progress }} aria-valuemin="0"
+                                                 aria-valuenow="{{ todo.progress }}" aria-valuemin="0"
                                                  aria-valuemax="100">{{ todo.progress }}%
                                             </div>
                                         </div>
