@@ -77,7 +77,7 @@ def test_signup_short_email(client):
     }, follow_redirects=True)
 
     assert response.status_code == 200
-    assert b'Email must be at least 3 characters' in response.data
+    assert b'Email must be at least 6 characters' in response.data
 
 def test_signup_short_first_name(client):
     response = client.post('/signup', data={
