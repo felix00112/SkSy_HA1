@@ -1,7 +1,11 @@
 import pytest
+from flask import url_for
+from flask_login import current_user
+
 from website import create_app, db
 from website.models import User
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
+
 
 @pytest.fixture
 def app():
@@ -14,6 +18,45 @@ def app():
 @pytest.fixture
 def client(app):
     return app.test_client()
+
+@pytest.fixture
+def user():
+    user = User(email='test@example.com', first_name='Test', password='password')
+    db.session.add(user)
+    db.session.commit()
+    return user
+
+def test_login_get(client):
+    response = client.get('/login')
+    assert response.status_code == 200
+    assert b'Login' in response.data
+
+# def test_login_post_success(client, user):
+#     response = client.post('/login', data=dict(
+#         email='test@example.com',
+#         password='password'
+#     ), follow_redirects=True)
+#
+#     assert response.status_code == 200
+#     assert b'You have successfully logged in' in response.data
+#     assert current_user.is_authenticated
+#     assert response.request.path == url_for('views.home')
+
+def test_login_post_incorrect_password(client, user):
+    response = client.post('/login', data=dict(
+        email='test@example.com',
+        password='wrongpassword'
+    ), follow_redirects=True)
+
+def test_login_post_nonexistent_user(client):
+    response = client.post('/login', data=dict(
+        email='nonexistent@example.com',
+        password='password'
+    ), follow_redirects=True)
+
+    assert response.status_code == 200
+    assert b'Incorrect email or password' in response.data
+    #assert not current_user.is_authenticated
 
 def test_signup(client):
     response = client.post('/signup', data={
